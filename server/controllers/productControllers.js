@@ -68,27 +68,56 @@ export const getProduct = asyncHandler(async (req, res) => {
 // @access Admin
 export const getAllProducts = asyncHandler(async (req, res) => {
   try {
-    // Filtering products
-    const filteredQueryObj = { ...req.query };
+    /*== FILTERING PRODUCTS ==*/
+    // Filtering products by brand, category, etc... EXAMPLE brand=hp&category=smartphone&color=red
+    const queryObj = { ...req.query };
 
-    // We exclude queries from query obj that are not needed for filtering
+    // List of querys that isn't needed in filtering collection, we loop through them and remove them from list of querys that we will pass to mongoose later
     const excludeFields = ["page", "sort", "limit", "fields"];
-    excludeFields.forEach((el) => delete filteredQueryObj[el]);
+    excludeFields.forEach((el) => delete queryObj[el]);
 
-    const filteredProducts = await Product.find(filteredQueryObj);
-    // Gets all products
-    // const products = await Product.find();
-    // \\ Filters using all querys that where included in req
-    // const products = await Product.find(req.query);
+    /* Coverting querys for price filter EXAMPLE api/product?price[gte]=100 
+        Convert received query object from { price: { gte: '100' } } to { price: { '$gte': '100' } } db format */
+    // gte > greater or equal to the given value
+    // lte > less than or equal to the given value
+    // gt > greater than the given value
+    // lt > less than the given value
+    let queryString = JSON.stringify(queryObj);
+    queryString = queryString.replace(
+      /\b(gte|gt|lte|lt)\b/g,
+      (match) => `$${match}`
+    );
 
-    // \\ Filters using only querys that we pass to find
-    // const products = await Product.find({
-    //   brand: req.query.brand,
-    //   category: req.query.category
-    // })
+    // Convert filtered version of query to object
+    let query = Product.find(JSON.parse(queryString));
+    /*== END OF FILTERING ==*/
 
-    // \\ Filters for certain document key that we chose
-    // const filteredProducts = await Product.where("category").equals(req.query.category)
+    /*== SORTING PRODUCTS ==*/
+    if (req.query.sort) {
+      // Sort query format is ?sort=category,brand we convert it to "category brand" db format
+      //    we can add - to querys to sort them descending ?sort=-category, -brand
+      const sortBy = req.query.sort.split(",").join(" ");
+      query = query.sort(sortBy);
+    } else {
+      // If there is no sort query provided, sort products by listing date, we pass -createdAt to sort date descending
+      query = query.sort("-createdAt");
+    }
+    /*== END OF SORTING==*/
+
+    /*== LIMITING THE FIELDS ==*/
+    // We can select what fields will db return to client for EXAMPLE > ?fields=title,price,category, mongo id returns by default for everything
+    if (req.query.fields) {
+      const fields = req.query.fields.split(",").join(" ");
+      query = query.select(fields);
+    } else {
+      // if no ?fields provided we can exclude fields by default
+      query = query.select("-__v");
+    }
+
+    /*== END OF LIMITING THE FIELDS ==*/
+
+    const filteredProducts = await query;
+
     res.json(filteredProducts);
   } catch (error) {
     throw new Error(error);
