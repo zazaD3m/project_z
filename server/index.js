@@ -2,15 +2,15 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
-import connectDB from "./config/dbConnect";
+import connectDB from "./config/dbConnect.js";
 // Routes imports
-import authRoutes from "./routes/authRoutes";
-import productRoutes from "./routes/productRoutes";
+import authRoutes from "./routes/authRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import blogRoutes from "./routes/blogRoutes.js";
 
-import { errorHandler, notFound } from "./middleware/errorHandler";
+import { errorHandler, notFound } from "./middleware/errorHandler.js";
 
-const logger = require("morgan");
-
+import morgan from "morgan";
 const app = express();
 
 // Load environment variables in process.env
@@ -26,13 +26,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Log incomming http requests in console
-app.use(logger("dev"));
+app.use(morgan("dev"));
 
 const PORT = process.env.PORT || 5000;
 
 // Routes
 app.use("/api/user", authRoutes);
 app.use("/api/product", productRoutes);
+app.use("/api/blog", blogRoutes);
 
 // Error handlers
 app.use(notFound);

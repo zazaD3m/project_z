@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
 
-import User from "../models/userModel";
+import User from "../models/userModel.js";
 
 // Checks if request headers has jwt token... If so it fetches user data from DB using id stored in jwt token and then attaches that user data to req.user
 const authMiddleware = asyncHandler(async (req, res, next) => {

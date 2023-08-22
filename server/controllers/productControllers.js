@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 import slugify from "slugify";
 
-import Product from "../models/productModel";
+import Product from "../models/productModel.js";
 
 // @desc Create new product
 // route POST /api/product/
@@ -23,7 +23,6 @@ export const createProduct = asyncHandler(async (req, res) => {
 // @access Admin
 export const updateProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  console.log(req.params);
   try {
     if (req.body.title) {
       req.body.slug = slugify(req.body.title);
@@ -115,6 +114,25 @@ export const getAllProducts = asyncHandler(async (req, res) => {
     }
 
     /*== END OF LIMITING THE FIELDS ==*/
+
+    /*== PAGINATION ==*/
+    // Current page of pages
+    const page = req.query.page;
+    // Number of products on a single page
+    const limit = req.query.limit;
+    // Number of products to skip to show rest on page for EXAMPLE we are on first page there are 20 products 5 on each page, skip will be zero so it will show first 5 products, when we go to second page skip will be 5 and it will skip first 5 products already shown on page 1 and display next 5 products and so on...
+    const skip = (page - 1) * limit;
+
+    // If there are less total products than requested page * product per page we throw error
+    if (req.query.page) {
+      const productCount = await Product.countDocuments();
+      if (skip >= productCount) {
+        throw new Error("This Page does not exist");
+      }
+    }
+    query = query.skip(skip).limit(limit);
+
+    /*== END OF PAGINATION ==*/
 
     const filteredProducts = await query;
 

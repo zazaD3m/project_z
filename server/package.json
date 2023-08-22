@@ -1,11 +1,12 @@
 {
-  "name": "server",
+  "name": "index",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -r esm server.js"
+    "start": "nodemon ./index.js"
   },
   "author": "Z.D",
   "license": "ISC",
@@ -13,11 +14,11 @@
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
-    "esm": "^3.2.25",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^6.11.5",
+    "nodemailer": "^6.9.4",
     "slugify": "^1.6.6"
   },
   "devDependencies": {
