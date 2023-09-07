@@ -3,12 +3,17 @@ import express from "express";
 import { authMiddleware, isAdmin } from "../middleware/authMiddleware.js";
 import {
   addToWishlist,
+  applyCoupon,
   blockUser,
+  createOrder,
   createUser,
   deleteUser,
+  emptyCart,
   forgotPasswordToken,
   getAllUsers,
+  getOrders,
   getUser,
+  getUserCart,
   getWishList,
   handleRefreshToken,
   loginAdmin,
@@ -17,8 +22,10 @@ import {
   resetPassword,
   saveUserAddress,
   unblockUser,
+  updateOrderStatus,
   updatePassword,
   updateUser,
+  userCart,
 } from "../controllers/userControllers.js";
 
 const router = express.Router();
@@ -55,6 +62,40 @@ router
   // @desc Put Add or Remove user from wishlist
   // route PUT /api/user/wishlist
   .put(authMiddleware, addToWishlist);
+
+router
+  .route("/cart")
+  // @desc Get users cart
+  // route GET /api/user/cart
+  .get(authMiddleware, getUserCart)
+  // @desc Post Add products to cart
+  // route POST /api/user/cart
+  .post(authMiddleware, userCart)
+  // @desc Delete Empty users cart
+  // route DELETE /api/user/cart
+  .delete(authMiddleware, emptyCart);
+
+// @desc Post Apply coupon
+// route POST /api/user/cart/applycoupon
+router.post("/cart/applycoupon", authMiddleware, applyCoupon);
+
+// @desc Post Create cash order
+// route POST /api/user/cart/cash-order
+router.post("/cart/cash-order", authMiddleware, createOrder);
+
+// @desc Get User orders
+// route GET /api/user/get-orders
+router.get("/get-orders", authMiddleware, getOrders);
+
+// @desc Put Update user order
+// route PUT /api/user/order/update-order/:id
+// id = order id
+router.put(
+  "/order/update-order/:id",
+  authMiddleware,
+  isAdmin,
+  updateOrderStatus
+);
 
 // @desc Logout user
 // route POST /api/user/login
