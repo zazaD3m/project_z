@@ -1,13 +1,17 @@
 import express from "express";
+import fs from "fs";
 
 import {
   createProduct,
   deleteProduct,
   getAllProducts,
   getProduct,
+  rating,
   updateProduct,
+  uploadImages,
 } from "../controllers/productControllers.js";
 import { isAdmin, authMiddleware } from "../middleware/authMiddleware.js";
+import { productImageResize, uploadImage } from "../middleware/uploadImages.js";
 
 const router = express.Router();
 
@@ -19,6 +23,21 @@ router
   // @desc Get all products
   // route GET /api/product/
   .get(getAllProducts);
+
+// @desc Put upload product images
+// route PUT /api/product/upload-images/:id
+router.put(
+  "/upload-images/:id",
+  authMiddleware,
+  isAdmin,
+  uploadImage.array("images", 10),
+  productImageResize,
+  uploadImages
+);
+
+// @desc Put Add rating to product
+// route PUT /api/product/rating
+router.put("/rating", authMiddleware, rating);
 
 router
   .route("/:id")

@@ -2,6 +2,9 @@ import asyncHandler from "express-async-handler";
 import slugify from "slugify";
 
 import Product from "../models/productModel.js";
+import validateMongodbId from "../utils/validateMongodbId.js";
+import User from "../models/userModel.js";
+import { cloudinaryUploadImg } from "../utils/cloudinary.js";
 
 // @desc Create new product
 // route POST /api/product/
@@ -23,6 +26,7 @@ export const createProduct = asyncHandler(async (req, res) => {
 // @access Admin
 export const updateProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  validateMongodbId(id);
   try {
     if (req.body.title) {
       req.body.slug = slugify(req.body.title);
@@ -41,6 +45,7 @@ export const updateProduct = asyncHandler(async (req, res) => {
 // @access Admin
 export const deleteProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  validateMongodbId(id);
   try {
     const product = await Product.findByIdAndDelete(id);
     res.json(product);
@@ -51,11 +56,18 @@ export const deleteProduct = asyncHandler(async (req, res) => {
 
 // @desc Get product
 // route GET /api/product/:id
-// @access Admin
+// @access Public
 export const getProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  validateMongodbId(id);
   try {
-    const product = await Product.findById(id);
+    // We get product and populate ratings arrays postedby with user that rated product
+    const product = await Product.findById(id).populate([
+      {
+        path: "ratings",
+        populate: [{ path: "postedby", select: "firstName" }],
+      },
+    ]);
     res.json(product);
   } catch (error) {
     throw new Error(error);
@@ -137,6 +149,85 @@ export const getAllProducts = asyncHandler(async (req, res) => {
     const filteredProducts = await query;
 
     res.json(filteredProducts);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+// @desc Put Add rating to product
+// route PUT /api/product/rating
+export const rating = asyncHandler(async (req, res) => {
+  const { _id } = req.user;
+  const { star, comment, productId } = req.body;
+  validateMongodbId([productId, _id]);
+  try {
+    const product = await Product.findById(productId);
+    // Check if user already rated product and is just changing rating
+    let alreadyRated = product.ratings.find(
+      (userId) => userId.postedby.toString() === _id.toString()
+    );
+    let rateProduct;
+    if (alreadyRated) {
+      // We find users item in array of ratings and edit star rating
+      rateProduct = await Product.updateOne(
+        { ratings: { $elemMatch: alreadyRated } },
+        { $set: { "ratings.$.star": star, "ratings.$.comment": comment } },
+        { new: true }
+      );
+    } else {
+      // We add users rating
+      rateProduct = await Product.findByIdAndUpdate(productId, {
+        $push: {
+          ratings: {
+            star: star,
+            postedby: _id,
+          },
+        },
+      });
+    }
+    const getAllRatings = await Product.findById(productId);
+    let totalRating = getAllRatings.ratings.length;
+    let ratingSum = getAllRatings.ratings
+      .map((item) => item.star)
+      .reduce((prev, curr) => prev + curr, 0);
+    let actualRating = Math.round(ratingSum / totalRating);
+    const final = await Product.findByIdAndUpdate(
+      productId,
+      { totalrating: actualRating },
+      { new: true }
+    );
+    res.json(final);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+// @desc
+// route
+export const uploadImages = asyncHandler(async (req, res) => {
+  // Get product id
+  const { id } = req.params;
+  validateMongodbId(id);
+
+  try {
+    const uploader = async (path, folder) =>
+      await cloudinaryUploadImg(path, folder);
+    const images = [];
+    const files = req.images;
+    for (const file of files) {
+      const newFile = await uploader(file, "nn prods");
+      images.push(newFile);
+    }
+
+    const findProductAndAddImages = await Product.findByIdAndUpdate(
+      id,
+      {
+        images: images,
+      },
+      { new: true }
+    );
+
+    res.json(findProductAndAddImages);
   } catch (error) {
     throw new Error(error);
   }

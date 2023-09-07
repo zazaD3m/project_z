@@ -40,10 +40,8 @@ const blogSchema = new Schema(
         ref: "User",
       },
     ],
-    image: {
-      type: String,
-      default:
-        "https://www.shutterstock.com/shutterstock/photos/1029506242/display_1500/stock-photo-blogging-blog-concepts-ideas-with-white-worktable-1029506242.jpg",
+    images: {
+      type: Array,
     },
     author: {
       type: String,

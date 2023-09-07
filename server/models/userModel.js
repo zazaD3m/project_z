@@ -41,7 +41,7 @@ const userSchema = new Schema(
       type: Array,
       default: [],
     },
-    address: [{ type: ObjectId, ref: "Address" }],
+    address: { type: String },
     wishlist: [{ type: ObjectId, ref: "Product" }],
     refreshToken: {
       type: String,

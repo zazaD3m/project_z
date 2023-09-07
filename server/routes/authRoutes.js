@@ -2,16 +2,20 @@ import express from "express";
 
 import { authMiddleware, isAdmin } from "../middleware/authMiddleware.js";
 import {
+  addToWishlist,
   blockUser,
   createUser,
   deleteUser,
   forgotPasswordToken,
   getAllUsers,
   getUser,
+  getWishList,
   handleRefreshToken,
+  loginAdmin,
   loginUser,
   logoutUser,
   resetPassword,
+  saveUserAddress,
   unblockUser,
   updatePassword,
   updateUser,
@@ -39,6 +43,19 @@ router.put("/password", authMiddleware, updatePassword);
 // route POST /api/user/login
 router.post("/login", loginUser);
 
+// @desc Login admin
+// route POST /api/user/admin-login
+router.post("/admin-login", loginAdmin);
+
+router
+  .route("/wishlist")
+  // @desc Get get users wishlist
+  // route GET /api/user/wishlist
+  .get(authMiddleware, getWishList)
+  // @desc Put Add or Remove user from wishlist
+  // route PUT /api/user/wishlist
+  .put(authMiddleware, addToWishlist);
+
 // @desc Logout user
 // route POST /api/user/login
 router.get("/logout", logoutUser);
@@ -55,6 +72,10 @@ router.get("/refresh", handleRefreshToken);
 // route PUT /api/user/edit-user
 // we get user using authmiddleware that gets user using jwt token
 router.put("/edit-user", authMiddleware, updateUser);
+
+// @desc Update users address
+// route PUT /api/user/save-address
+router.put("/save-address", authMiddleware, saveUserAddress);
 
 // @desc Block a user
 // route PUT /api/user/block-user/:id

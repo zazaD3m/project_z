@@ -31,6 +31,48 @@ export const createUser = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc Login admin
+// route POST /api/user/login
+// @access Private
+export const loginAdmin = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  // Check if admin with entered email exists
+  const admin = await User.findOne({ email });
+
+  if (admin.role !== "admin") {
+    throw new Error("Not Authorized");
+  }
+
+  // Check if entered password matches the password in DB
+  if (admin && (await admin.isPasswordMatched(password))) {
+    // When admin logs in we refresh his token and store it in db
+    const refreshToken = await generateRefreshToken(admin._id);
+    const updateAdmin = await User.findByIdAndUpdate(
+      admin._id,
+      {
+        refreshToken: refreshToken,
+      },
+      { new: true }
+    );
+    // We also store refreshtoken in admins cookies for 3 days
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      maxAge: 72 * 60 * 60 * 1000,
+    });
+    // Generate and Assign jwt token to logged in admin
+    res.json({
+      _id: admin._id,
+      firstName: admin.firstName,
+      lastName: admin.lastName,
+      email: admin.email,
+      token: generateToken(admin._id),
+    });
+  } else {
+    throw new Error("Invalid Credentials");
+  }
+});
+
 // @desc Login user
 // route POST /api/user/login
 // @access Public
@@ -134,6 +176,29 @@ export const logoutUser = asyncHandler(async (req, res) => {
   return res.sendStatus(204); // forbidden
 });
 
+// @desc
+// route
+export const saveUserAddress = asyncHandler(async (req, res, next) => {
+  const { _id } = req.user;
+  validateMongodbId(_id);
+
+  const { firstName, lastName, email } = req.body;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      _id,
+      {
+        address: req.body.address,
+      },
+      { new: true }
+    );
+    res.json({
+      updatedUser,
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
 // @desc Get all users
 // route GET /api/user/all-users
 // @access Public
@@ -167,6 +232,7 @@ export const getUser = asyncHandler(async (req, res) => {
 // @access Public
 export const deleteUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  validateMongodbId(id);
   try {
     const deletedUser = await User.findByIdAndDelete(id);
     res.json({
@@ -318,4 +384,58 @@ export const resetPassword = asyncHandler(async (req, res) => {
   user.passwordResetExpires = undefined;
   await user.save();
   res.json(user);
+});
+
+// @desc Put Add or Remove product from wishlist
+// route PUT /api/user/wishlist
+// @access User
+export const addToWishlist = asyncHandler(async (req, res) => {
+  const { _id } = req.user;
+  const { productId } = req.body;
+  validateMongodbId([_id, productId]);
+  try {
+    let user = await User.findById(_id);
+    // Check if user already added product to wishlist
+    const alreadyAdded = user.wishlist.find(
+      (id) => id.toString() === productId
+    );
+
+    if (alreadyAdded) {
+      // If already added we remove product from wishlist
+      user = await User.findByIdAndUpdate(
+        _id,
+        {
+          $pull: { wishlist: productId },
+        },
+        { new: true }
+      );
+    } else {
+      // We add product to wishlist
+      user = await User.findByIdAndUpdate(
+        _id,
+        {
+          $push: { wishlist: productId },
+        },
+        { new: true }
+      );
+    }
+    res.json(user);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+// @desc Get get users wishlist
+// route GET /api/user/wishlist
+// @access User
+export const getWishList = asyncHandler(async (req, res) => {
+  const { _id } = req.user;
+  validateMongodbId(_id);
+
+  try {
+    const user = await User.findById(_id);
+    res.json(user);
+  } catch (error) {
+    throw new Error(error);
+  }
 });

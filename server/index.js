@@ -7,6 +7,10 @@ import connectDB from "./config/dbConnect.js";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import blogRoutes from "./routes/blogRoutes.js";
+import productCategoryRoutes from "./routes/prodCategoryRoutes.js";
+import blogCategoryRoutes from "./routes/blogCategoryRoutes.js";
+import brandRoutes from "./routes/brandRoutes.js";
+import couponRoutes from "./routes/couponRoutes.js";
 
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 
@@ -34,6 +38,10 @@ const PORT = process.env.PORT || 5000;
 app.use("/api/user", authRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/blog", blogRoutes);
+app.use("/api/category", productCategoryRoutes);
+app.use("/api/blogcategory", blogCategoryRoutes);
+app.use("/api/brand", brandRoutes);
+app.use("/api/coupon", couponRoutes);
 
 // Error handlers
 app.use(notFound);

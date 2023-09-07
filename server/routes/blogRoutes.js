@@ -9,12 +9,25 @@ import {
   updateBlog,
 } from "../controllers/blogControllers.js";
 import { authMiddleware, isAdmin } from "../middleware/authMiddleware.js";
+import { blogImageResize, uploadImage } from "../middleware/uploadImages.js";
+import { uploadImages } from "../controllers/blogControllers.js";
 
 const router = express.Router();
 
 // @desc Create new blog post
 // route POST /api/blog/
 router.post("/", authMiddleware, isAdmin, createBlog);
+
+// @desc Put upload blog images
+// route PUT /api/blog/upload-images/:id
+router.put(
+  "/upload-images/:id",
+  authMiddleware,
+  isAdmin,
+  uploadImage.array("images", 10),
+  blogImageResize,
+  uploadImages
+);
 
 // @desc Like blog post
 // route PUT /api/blog/likes

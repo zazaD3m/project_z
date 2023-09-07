@@ -2,6 +2,8 @@ import asyncHandler from "express-async-handler";
 
 import User from "../models/userModel.js";
 import Blog from "../models/blogModel.js";
+import validateMongodbId from "../utils/validateMongodbId.js";
+import { cloudinaryUploadImg } from "../utils/cloudinary.js";
 
 // @desc Create new blog post
 // route POST /api/blog/
@@ -20,6 +22,7 @@ export const createBlog = asyncHandler(async (req, res) => {
 // @access Admin
 export const updateBlog = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  validateMongodbId(id);
   try {
     const updatedBlog = await Blog.findByIdAndUpdate(id, req.body, {
       new: true,
@@ -35,8 +38,13 @@ export const updateBlog = asyncHandler(async (req, res) => {
 // @access Public
 export const getBlog = asyncHandler(async (req, res) => {
   const { id } = req.params;
-
+  validateMongodbId(id);
   try {
+    // We get blog post and also populate likes and dislikes array with user name and surname
+    // instead of just _id s there will be firstName and lastName  in likes and dislikes array
+    const getBlog = await Blog.findById(id)
+      .populate("likes", ["firstName", "lastName"])
+      .populate("disLikes", ["firstName", "lastName"]);
     const blog = await Blog.findByIdAndUpdate(
       id,
       {
@@ -45,7 +53,7 @@ export const getBlog = asyncHandler(async (req, res) => {
       { new: true }
     );
 
-    res.json(blog);
+    res.json(getBlog);
   } catch (error) {
     throw new Error(error);
   }
@@ -69,7 +77,7 @@ export const getAllBlogs = asyncHandler(async (req, res) => {
 // @access Admin
 export const deleteBlog = asyncHandler(async (req, res) => {
   const { id } = req.params;
-
+  validateMongodbId(id);
   try {
     const deletedBlog = await Blog.findByIdAndDelete(id);
 
@@ -85,7 +93,7 @@ export const deleteBlog = asyncHandler(async (req, res) => {
 export const likeBlog = asyncHandler(async (req, res) => {
   const { blogId } = req.body;
   const loggedInUserId = req.user._id;
-
+  validateMongodbId([loggedInUserId, blogId]);
   try {
     // get blog post to be liked
     const blog = await Blog.findById(blogId);
@@ -140,7 +148,7 @@ export const likeBlog = asyncHandler(async (req, res) => {
 export const dislikeBlog = asyncHandler(async (req, res) => {
   const { blogId } = req.body;
   const loggedInUserId = req.user._id;
-
+  validateMongodbId([loggedInUserId, blogId]);
   try {
     // get blog post to be disliked
     const blog = await Blog.findById(blogId);
@@ -185,6 +193,35 @@ export const dislikeBlog = asyncHandler(async (req, res) => {
       }
     }
     res.json(updatedBlog);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+export const uploadImages = asyncHandler(async (req, res) => {
+  // Get blog id
+  const { id } = req.params;
+  validateMongodbId(id);
+
+  try {
+    const uploader = async (path, folder) =>
+      await cloudinaryUploadImg(path, folder);
+    const images = [];
+    const files = req.images;
+    for (const file of files) {
+      const newFile = await uploader(file, "blog images");
+      images.push(newFile);
+    }
+
+    const findBlogAndAddImages = await Blog.findByIdAndUpdate(
+      id,
+      {
+        images: images,
+      },
+      { new: true }
+    );
+
+    res.json(findBlogAndAddImages);
   } catch (error) {
     throw new Error(error);
   }
