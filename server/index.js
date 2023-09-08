@@ -10,6 +10,8 @@ import blogRoutes from "./routes/blogRoutes.js";
 import productCategoryRoutes from "./routes/prodCategoryRoutes.js";
 import blogCategoryRoutes from "./routes/blogCategoryRoutes.js";
 import brandRoutes from "./routes/brandRoutes.js";
+import colorRoutes from "./routes/colorRoutes.js";
+import enquiryRoutes from "./routes/enquiryRoutes.js";
 import couponRoutes from "./routes/couponRoutes.js";
 
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
@@ -41,7 +43,9 @@ app.use("/api/blog", blogRoutes);
 app.use("/api/category", productCategoryRoutes);
 app.use("/api/blogcategory", blogCategoryRoutes);
 app.use("/api/brand", brandRoutes);
+app.use("/api/color", colorRoutes);
 app.use("/api/coupon", couponRoutes);
+app.use("/api/enquiry", enquiryRoutes);
 
 // Error handlers
 app.use(notFound);

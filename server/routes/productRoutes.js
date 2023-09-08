@@ -3,6 +3,7 @@ import fs from "fs";
 
 import {
   createProduct,
+  deleteImages,
   deleteProduct,
   getAllProducts,
   getProduct,
@@ -33,6 +34,15 @@ router.put(
   uploadImage.array("images", 10),
   productImageResize,
   uploadImages
+);
+
+// @desc Delete delete product images
+// route DELETE /api/product/delete-images/:productId/:imageId
+router.delete(
+  "/delete-images/:productId/:imageId",
+  authMiddleware,
+  isAdmin,
+  deleteImages
 );
 
 // @desc Put Add rating to product

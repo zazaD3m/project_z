@@ -4,7 +4,10 @@ import slugify from "slugify";
 import Product from "../models/productModel.js";
 import validateMongodbId from "../utils/validateMongodbId.js";
 import User from "../models/userModel.js";
-import { cloudinaryUploadImg } from "../utils/cloudinary.js";
+import {
+  cloudinaryDeleteImg,
+  cloudinaryUploadImg,
+} from "../utils/cloudinary.js";
 
 // @desc Create new product
 // route POST /api/product/
@@ -202,8 +205,8 @@ export const rating = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc
-// route
+// @desc Put upload product images
+// route PUT /api/product/upload-images/:id
 export const uploadImages = asyncHandler(async (req, res) => {
   // Get product id
   const { id } = req.params;
@@ -228,6 +231,31 @@ export const uploadImages = asyncHandler(async (req, res) => {
     );
 
     res.json(findProductAndAddImages);
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+// @desc Delete delete product images
+// route DELETE /api/product/delete-images/:productId/:imageId
+export const deleteImages = asyncHandler(async (req, res) => {
+  // Get product and image ids
+  const { productId, imageId } = req.params;
+  validateMongodbId(productId);
+
+  const image = `nn prods/${imageId}`;
+  try {
+    await cloudinaryDeleteImg(image);
+
+    let product = await Product.findByIdAndUpdate(
+      productId,
+      {
+        $pull: { images: { public_id: image } },
+      },
+      { new: true }
+    ).exec();
+
+    res.json(product);
   } catch (error) {
     throw new Error(error);
   }

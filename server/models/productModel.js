@@ -41,10 +41,8 @@ const productSchema = new Schema(
     images: {
       type: Array,
     },
-    color: {
-      type: String,
-      required: true,
-    },
+    color: [],
+    tags: [],
     ratings: [
       {
         star: Number,

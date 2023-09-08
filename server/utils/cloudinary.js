@@ -31,3 +31,16 @@ export async function cloudinaryUploadImg(file, folder) {
       return { message: "Fail" };
     });
 }
+
+export async function cloudinaryDeleteImg(file) {
+  return cloudinary.uploader
+    .destroy(file, { invalidate: true })
+    .then((result) => {
+      return {
+        message: "Successfully Deleted",
+      };
+    })
+    .catch((error) => {
+      return { message: "Fail" };
+    });
+}
