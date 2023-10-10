@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @layer components {
+  .editor-btn {
+    @apply flex justify-center items-center text-slate-700 rounded-lg w-8 aspect-square;
+  }
+
+  .active-editor-btn {
+    @apply text-slate-800 bg-slate-200;
+  }
+} */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    font-family: Rubik, system-ui, sans-serif;
+    letter-spacing: 0.025rem;
+  }
+  a {
+    text-decoration: none;
+    display: inline-block;
+  }
+  input,
+  textarea,
+  button,
+  select,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 214, 27%, 10%;
+    --primary-light: 213, 28%, 19%;
+    --primary-foreground: 210 20% 98%;
+    --yellow: 34, 99%, 70%;
+    --bg-gray: 240, 11%, 96%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
+    --radius: 0.75rem;
+    --swiper-pagination-color: #232f3e;
+  }
+}

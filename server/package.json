@@ -6,7 +6,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./index.js"
+    "start": "nodemon ./index.js",
+    "server": "nodemon ./index.js",
+    "client": "cd ../client && npm run dev",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "author": "Z.D",
   "license": "ISC",
@@ -26,6 +29,7 @@
     "uniqid": "^5.4.0"
   },
   "devDependencies": {
+    "concurrently": "^8.2.1",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.1"
   }
