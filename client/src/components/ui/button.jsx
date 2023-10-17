@@ -24,7 +24,7 @@ const Button = React.forwardRef(
               variants: {
                 variant: {
                   default:
-                    "bg-primary-light text-primary-foreground hover:bg-yellow hover:text-primary",
+                    "bg-primary-light text-primary-foreground lg:hover:bg-yellow lg:hover:text-primary",
                   ghost: "rounded-none bg-transparent",
                 },
                 size: {

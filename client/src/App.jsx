@@ -33,10 +33,11 @@ const router = createBrowserRouter(
       <Route path="blog" element={<BlogPage />} />
       <Route path="wishlist" element={<Wishlist />} />
       <Route path="account">
-        <Route index element={<Account />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="recover" element={<RecoverAccount />} />
+        <Route path=":accountPage" element={<Account />} />
+        <Route index element={<Account />} />
       </Route>
     </Route>,
   ),
