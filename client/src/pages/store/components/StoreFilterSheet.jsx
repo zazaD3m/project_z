@@ -41,35 +41,41 @@ const StoreFilterSheet = () => {
           <Separator className="opacity-30" />
           <div className="flex grow flex-col p-2 text-sm font-normal ">
             <StoreFilterPrice />
-            <ol className="space-y-2">
+            <ul className="space-y-2">
               {[
                 {
                   title: "categories",
                   content: ["home", "smartphones", "monitors"],
+                  id: 1,
                 },
                 {
                   title: "categories",
                   content: ["home", "smartphones", "monitors"],
+                  id: 2,
                 },
                 {
                   title: "categories",
                   content: ["home", "smartphones", "monitors"],
+                  id: 3,
                 },
                 {
                   title: "size",
+                  id: 4,
                 },
                 {
                   title: "brand",
+                  id: 5,
                 },
                 {
                   title: "color",
+                  id: 6,
                 },
               ].map((item, i) => (
                 <li key={item.title + i}>
                   <StoreAccordion data={item} />
                 </li>
               ))}
-            </ol>
+            </ul>
           </div>
           <Separator className="opacity-30" />
           <SheetFooter className="flex w-full flex-row justify-around pb-4">

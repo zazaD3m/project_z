@@ -17,7 +17,7 @@ const filterVariants = {
 const StoreAccordion = ({ data }) => {
   return (
     <Accordion type="single" collapsible className="text-sm font-medium">
-      <AccordionItem value="item-1" className="border-none">
+      <AccordionItem value={`item-${data.id}`} className="border-none">
         <AccordionTrigger className="translate-y-2 rounded-sm bg-bggray p-4 no-underline focus:no-underline">
           {data.title}
         </AccordionTrigger>

@@ -18,6 +18,10 @@ import ContactPage from "./pages/contact/ContactPage";
 
 import "./App.css";
 import Wishlist from "./pages/wishlist/Wishlist";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import Account from "./pages/auth/Account";
+import RecoverAccount from "./pages/auth/RecoverAccount";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +32,12 @@ const router = createBrowserRouter(
       <Route path="store" element={<StorePage />} />
       <Route path="blog" element={<BlogPage />} />
       <Route path="wishlist" element={<Wishlist />} />
+      <Route path="account">
+        <Route index element={<Account />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="recover" element={<RecoverAccount />} />
+      </Route>
     </Route>,
   ),
 );

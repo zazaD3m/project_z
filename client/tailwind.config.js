@@ -54,6 +54,23 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        slideDownAndFade: {
+          from: { opacity: 0, transform: "translateY(-2px)" },
+          to: { opacity: 1, transform: "translateY(0)" },
+        },
+        slideLeftAndFade: {
+          from: { opacity: 0, transform: "translateX(2px)" },
+          to: { opacity: 1, transform: "translateX(0)" },
+        },
+        slideUpAndFade: {
+          from: { opacity: 0, transform: "translateY(2px)" },
+          to: { opacity: 1, transform: "translateY(0)" },
+        },
+        slideRightAndFade: {
+          from: { opacity: 0, transform: "translateX(-2px)" },
+          to: { opacity: 1, transform: "translateX(0)" },
+        },
+
         enterFromRight: {
           from: { opacity: 0, transform: "translateX(200px)" },
           to: { opacity: 1, transform: "translateX(0)" },
@@ -119,6 +136,13 @@ export default {
         },
       },
       animation: {
+        slideDownAndFade:
+          "slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
+        slideLeftAndFade:
+          "slideLeftAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
+        slideUpAndFade: "slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
+        slideRightAndFade:
+          "slideRightAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)",
         scaleIn: "scaleIn 200ms ease",
         scaleOut: "scaleOut 200ms ease",
         fadeIn: "fadeIn 200ms ease",

@@ -19,7 +19,8 @@
   body {
     @apply bg-background text-foreground;
   }
-  html {
+  html,
+  button {
     font-family: Rubik, system-ui, sans-serif;
     letter-spacing: 0.025rem;
   }

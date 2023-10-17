@@ -5,8 +5,21 @@ const BreadCrumb = () => {
   const location = useLocation();
   let currentLink = "";
   const crumbs = location.pathname.split("/").filter((crumb) => crumb !== "");
+  let dontRender = false;
 
-  return location.pathname === "/" ? null : (
+  if (location.pathname.length === 1) {
+    dontRender = true;
+  } else {
+    switch (crumbs[0]) {
+      case "account":
+        dontRender = true;
+        break;
+      default:
+        break;
+    }
+  }
+
+  return dontRender ? null : (
     <nav className="flex justify-center py-4" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 text-sm text-primary">
         <li className="inline-flex items-center">

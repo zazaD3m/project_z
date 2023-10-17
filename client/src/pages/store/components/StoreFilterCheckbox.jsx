@@ -11,13 +11,13 @@ const StoreFilterCheckbox = ({ data: { title, label }, color }) => {
   return (
     <li className="group flex w-min items-center space-x-2">
       {color ? (
-        <TooltipProvider>
+        <TooltipProvider delayDuration={100}>
           <Tooltip>
             <TooltipTrigger asChild>
               <Checkbox
                 color={color ? color : ""}
                 id={`productFilter-${title}`}
-                className="mr-2 cursor-pointer opacity-50 group-hover:opacity-80 data-[state=checked]:opacity-100"
+                className="mr-2 cursor-pointer opacity-50 data-[state=checked]:opacity-100 lg:group-hover:opacity-80"
               />
             </TooltipTrigger>
             <TooltipContent>{label}</TooltipContent>
@@ -27,11 +27,11 @@ const StoreFilterCheckbox = ({ data: { title, label }, color }) => {
         <>
           <Checkbox
             id={`productFilter-${title}`}
-            className="mr-2 cursor-pointer opacity-50 group-hover:opacity-80 data-[state=checked]:opacity-100"
+            className="mr-2 cursor-pointer opacity-50 data-[state=checked]:opacity-100 lg:group-hover:opacity-80"
           />
           <Label
             htmlFor={`productFilter-${title}`}
-            className="cursor-pointer text-base opacity-50 group-hover:opacity-80 peer-data-[state=checked]:opacity-100"
+            className="cursor-pointer text-base opacity-50 peer-data-[state=checked]:opacity-100 lg:group-hover:opacity-80"
           >
             {label}(25)
           </Label>
