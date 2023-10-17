@@ -22,7 +22,7 @@ const AccountMain = ({ className, accountPage }) => {
             </Link>
           </Button>
         </div>
-        <div className="mt-[60px] lg:mt-0">
+        <div className="mt-[60px] h-full w-full lg:mt-0">
           {accountPage === "profile" ? (
             <AccountProfile />
           ) : accountPage === "address" ? (

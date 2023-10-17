@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useRef } from "react";
 import AccountMain from "./container/AccountMain";
 import AccountSidebar from "./container/AccountSidebar";
 import { cn } from "../../lib/utils";
@@ -17,7 +18,7 @@ const Account = () => {
 
   return (
     <>
-      <section className="container flex flex-col items-center bg-bggray p-7 py-10">
+      <section className="container flex flex-col items-center bg-bggray pb-20 pt-8">
         <h2 className=" mb-4 text-4xl">Hello Zaza</h2>
         <div className="flex w-full gap-8">
           <AccountSidebar
