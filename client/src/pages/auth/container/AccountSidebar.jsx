@@ -1,58 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Button } from "../../../components/ui/button";
-import { cn } from "../../../lib/utils";
 
-const AccountSidebar = ({
-  className,
-  openedAccountComponent,
-  windowSize,
-  setOpenedAccountComponent,
-}) => {
+const AccountSidebar = ({ className }) => {
   return (
     <section className={className}>
       <Button
-        onClick={(e) => {
-          e.preventDefault();
-          setOpenedAccountComponent("MyProfile");
-        }}
-        className={cn(
-          "w-2/3 rounded-sm",
-          windowSize < 1024
-            ? ""
-            : openedAccountComponent === "MyProfile"
-            ? "bg-yellow text-primary"
-            : openedAccountComponent === "default"
-            ? "bg-yellow text-primary"
-            : "",
-        )}
+        asChild
+        className="w-2/3 rounded-sm aria-[current=page]:bg-yellow aria-[current=page]:text-primary"
       >
-        My Profile
+        <NavLink to="/account/profile">My Profile</NavLink>
       </Button>
       <Button
-        onClick={(e) => {
-          e.preventDefault();
-          setOpenedAccountComponent("MyAddress");
-        }}
-        className={cn(
-          "w-2/3 rounded-sm",
-          openedAccountComponent === "MyAddress"
-            ? "bg-yellow text-primary"
-            : "",
-        )}
+        asChild
+        className="w-2/3 rounded-sm aria-[current=page]:bg-yellow aria-[current=page]:text-primary"
       >
-        My Address
+        <NavLink to="/account/address">My Address</NavLink>
       </Button>
       <Button
-        onClick={(e) => {
-          e.preventDefault();
-          setOpenedAccountComponent("MyOrders");
-        }}
-        className={cn(
-          "w-2/3 rounded-sm",
-          openedAccountComponent === "MyOrders" ? "bg-yellow text-primary" : "",
-        )}
+        asChild
+        className="w-2/3 rounded-sm aria-[current=page]:bg-yellow aria-[current=page]:text-primary"
       >
-        My Orders
+        <NavLink to="/account/orders">My Orders</NavLink>
       </Button>
       <Button asChild className="w-2/3 rounded-sm">
         <Link to="/wishlist">My Wishlist</Link>
