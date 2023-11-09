@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 const Blogs = () => {
   return (
@@ -13,10 +14,10 @@ const Blogs = () => {
       <div className="flex justify-between pb-6">
         <h3 className="text-xl font-medium lg:text-2xl">Our Latest News</h3>
         <div className="flex gap-1">
-          <button className="blogsNavigationPrev flex cursor-pointer items-center justify-center rounded-full p-0 px-0.5 transition-all duration-100 active:bg-yellow lg:p-1.5 lg:hover:bg-yellow">
+          <button className="blogsNavigationPrev flex cursor-pointer items-center justify-center rounded-full p-0 px-0.5 transition-all duration-100 active:bg-yellow disabled:invisible lg:p-1.5 lg:hover:bg-yellow">
             <ChevronLeft className="h-full w-full active:scale-125" />
           </button>
-          <button className="blogsNavigationNext flex cursor-pointer items-center justify-center rounded-full p-0 px-0.5 transition-all duration-100 active:bg-yellow lg:p-1.5 lg:hover:bg-yellow">
+          <button className="blogsNavigationNext flex cursor-pointer items-center justify-center rounded-full p-0 px-0.5 transition-all duration-100 active:bg-yellow disabled:invisible lg:p-1.5 lg:hover:bg-yellow">
             <ChevronRight className="h-full w-full active:scale-125" />
           </button>
         </div>

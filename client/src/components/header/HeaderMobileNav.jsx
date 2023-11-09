@@ -16,16 +16,19 @@ import { Separator } from "../ui/separator";
 const HeaderMobileNav = () => {
   return (
     <>
-      <Sheet className="lg:hidden">
-        <SheetTrigger asChild className="lg:hidden">
+      <Sheet>
+        <SheetTrigger asChild>
           <Button variant="ghost" className="p-0">
             <AlignJustify size={26} strokeWidth={2.5} />
             <span className="sr-only">Navigation</span>
           </Button>
         </SheetTrigger>
         <SheetContent
+          onOpenAutoFocus={(e) => {
+            e.preventDefault();
+          }}
           side="left"
-          className="max-h-screen w-[300px] max-w-[300px]  overflow-auto bg-primary px-0 pt-12 text-primary-foreground sm:w-[400px] sm:max-w-[400px]"
+          className="max-h-screen w-[300px] max-w-[300px] overflow-auto bg-primary px-0 pt-12 text-primary-foreground sm:w-[400px] sm:max-w-[400px]"
         >
           <Separator />
           <ul>{postNavContent(navContent)}</ul>

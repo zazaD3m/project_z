@@ -2,15 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer components {
-  .editor-btn {
-    @apply flex justify-center items-center text-slate-700 rounded-lg w-8 aspect-square;
+@layer components {
+  .productDetailDialogThumb .swiper-slide,
+  .productDetailsPageThumb .swiper-slide {
+    @apply opacity-60;
   }
 
-  .active-editor-btn {
-    @apply text-slate-800 bg-slate-200;
+  .productDetailDialogThumb .swiper-slide-thumb-active,
+  .productDetailsPageThumb .swiper-slide-thumb-active {
+    @apply border opacity-100;
   }
-} */
+}
 
 @layer base {
   * {

@@ -5,9 +5,9 @@ const BlogPage = () => {
     <>
       <section className="container bg-bggray py-12">
         <div className="grid w-full grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 ">
-          {[...Array(10).keys()].map((item) => (
+          {[...Array(10).keys()].map((item, id) => (
             <div key={item} className="">
-              <BlogCard className="my-0 sm:mt-0" />
+              <BlogCard cusId={id} className="my-0 sm:mt-0" />
             </div>
           ))}
         </div>

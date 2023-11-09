@@ -20,8 +20,8 @@ const BreadCrumb = () => {
   }
 
   return dontRender ? null : (
-    <nav className="flex justify-center py-4" aria-label="Breadcrumb">
-      <ol className="inline-flex items-center space-x-1 text-sm text-primary">
+    <nav className="flex justify-center px-4 py-2" aria-label="Breadcrumb">
+      <ol className="inline-flex flex-wrap items-center justify-center gap-y-1 space-x-1 text-sm text-primary">
         <li className="inline-flex items-center">
           <Link
             to={"/"}

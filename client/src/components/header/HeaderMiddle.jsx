@@ -5,11 +5,16 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import HeaderMiddleProfile from "./HeaderMiddleProfile";
 import HeaderMobileNav from "./HeaderMobileNav";
+import CartModal from "../CartModal";
+import useWindowSize from "../../hooks/useWindowSize";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 
 const HeaderMiddle = () => {
+  const { width } = useWindowSize();
+
   return (
     <>
-      <HeaderMobileNav />
+      {width < 1024 && <HeaderMobileNav />}
       <div className="ml-2 mr-auto sm:ml-4 lg:ml-0">
         <Link to="/">
           <p className="cursor-pointer text-3xl font-semibold">Digitic.</p>
@@ -55,19 +60,29 @@ const HeaderMiddle = () => {
           <HeaderMiddleProfile />
         </li>
         <li className="flex items-center">
-          <Button variant="ghost" asChild className="m-0 gap-2 p-0">
-            <Link to="/">
-              <div className="relative inline-flex items-center">
-                <ShoppingBag
-                  strokeWidth={2}
-                  className="text-yellow  sm:h-8 sm:w-8 lg:h-9 lg:w-9"
-                />
-                <Badge className="sm:h-4 sm:w-4 sm:text-sm lg:h-5 lg:w-5 lg:bg-primary lg:text-base">
-                  2
-                </Badge>
-              </div>
-            </Link>
-          </Button>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" className="m-0 gap-2 p-0">
+                <div className="relative inline-flex items-center">
+                  <ShoppingBag
+                    strokeWidth={2}
+                    className="text-yellow  sm:h-8 sm:w-8 lg:h-9 lg:w-9"
+                  />
+                  <Badge className="sm:h-4 sm:w-4 sm:text-sm lg:h-5 lg:w-5 lg:bg-primary lg:text-base">
+                    2
+                  </Badge>
+                </div>
+              </Button>
+            </SheetTrigger>
+            <SheetContent
+              onOpenAutoFocus={(e) => {
+                e.preventDefault();
+              }}
+              className="z-[9999] max-h-screen overflow-auto p-0 pt-12"
+            >
+              <CartModal />
+            </SheetContent>
+          </Sheet>
         </li>
       </ul>
     </>

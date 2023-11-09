@@ -8,10 +8,11 @@ import { Pagination, Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/autoplay";
 
 const Categories = () => {
   return (
-    <section className="bg-bggray container relative pb-8">
+    <section className="container relative bg-bggray pb-8">
       <Swiper
         slidesPerView={1}
         autoplay={{

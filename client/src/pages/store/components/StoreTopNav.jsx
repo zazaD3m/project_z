@@ -10,20 +10,28 @@ import { cn } from "../../../lib/utils";
 
 import { Grid2X2, Grid3X3, Maximize2 } from "lucide-react";
 import StoreFilterSheet from "./StoreFilterSheet";
+import { useState } from "react";
 
 const StoreTopNav = ({
   className,
-  productListDetails: {
-    productListDetails: { numOfColumns, sortType },
-    setProductListDetails,
-  },
+  productListDetails: { numOfColumns, sortType },
+  setProductListDetails,
 }) => {
+  const [storeSelectContainer, setStoreSelectContainer] = useState(null);
+
   return (
     <div className="w-full rounded-sm bg-primary-foreground p-1.5 shadow-sm">
       <nav className="h-10">
         <ul className="flex h-full items-center justify-between">
           <li className="flex h-full basis-1/3 items-center justify-start gap-3 lg:order-2 lg:justify-end ">
             <div
+              onClick={(e) => {
+                e.preventDefault();
+                return setProductListDetails((prevState) => ({
+                  ...prevState,
+                  numOfColumns: "max",
+                }));
+              }}
               className={cn(
                 "h-9 w-9 rounded-sm border border-input bg-bggray p-2 text-primary shadow",
                 className,
@@ -33,18 +41,16 @@ const StoreTopNav = ({
                 },
               )}
             >
-              <Grid3X3
-                className="h-full w-full"
-                onClick={(e) => {
-                  e.preventDefault();
-                  return setProductListDetails((prevState) => ({
-                    ...prevState,
-                    numOfColumns: "max",
-                  }));
-                }}
-              />
+              <Grid3X3 className="h-full w-full" />
             </div>
             <div
+              onClick={(e) => {
+                e.preventDefault();
+                return setProductListDetails((prevState) => ({
+                  ...prevState,
+                  numOfColumns: "mid",
+                }));
+              }}
               className={cn(
                 "hidden h-9 w-9 rounded-sm border border-input bg-bggray p-2 text-primary shadow lg:block",
                 className,
@@ -54,18 +60,16 @@ const StoreTopNav = ({
                 },
               )}
             >
-              <Grid2X2
-                className="h-full w-full"
-                onClick={(e) => {
-                  e.preventDefault();
-                  return setProductListDetails((prevState) => ({
-                    ...prevState,
-                    numOfColumns: "mid",
-                  }));
-                }}
-              />
+              <Grid2X2 className="h-full w-full" />
             </div>
             <div
+              onClick={(e) => {
+                e.preventDefault();
+                return setProductListDetails((prevState) => ({
+                  ...prevState,
+                  numOfColumns: "min",
+                }));
+              }}
               className={cn(
                 "h-9 w-9 rounded-sm border border-input bg-bggray p-2 text-primary shadow",
                 className,
@@ -75,16 +79,7 @@ const StoreTopNav = ({
                 },
               )}
             >
-              <Maximize2
-                className="h-full w-full"
-                onClick={(e) => {
-                  e.preventDefault();
-                  return setProductListDetails((prevState) => ({
-                    ...prevState,
-                    numOfColumns: "min",
-                  }));
-                }}
-              />
+              <Maximize2 className="h-full w-full" />
             </div>
           </li>
           <li className="flex h-full max-w-[250px] basis-1/3 items-center lg:order-1">

@@ -37,7 +37,7 @@ const NavigationMenuTrigger = React.forwardRef(
       className={cn("", className)}
       {...props}
     >
-      {children}{" "}
+      {children}
     </NavigationMenuPrimitive.Trigger>
   ),
 );

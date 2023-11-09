@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
@@ -19,32 +20,40 @@ const Footer = () => {
           {/* <!-- End Col --> */}
 
           <div className="col-span-1">
-            <h4 className="font-semibold">Product</h4>
+            <h4 className="font-semibold">Information</h4>
 
             <div className="mt-3 grid space-y-3">
               <p>
-                <a
+                <Link
                   className="inline-flex gap-x-2 text-gray-400 hover:text-yellow"
-                  href="#"
+                  to="/privacy-policy"
                 >
-                  Pricing
-                </a>
+                  Privacy Policy
+                </Link>
               </p>
               <p>
-                <a
+                <Link
                   className="inline-flex gap-x-2 text-gray-400 hover:text-yellow"
-                  href="#"
+                  to="/refund-policy"
                 >
-                  Changelog
-                </a>
+                  Refund Policy
+                </Link>
               </p>
               <p>
-                <a
+                <Link
                   className="inline-flex gap-x-2 text-gray-400 hover:text-yellow"
-                  href="#"
+                  to="/shipping-policy"
                 >
-                  Docs
-                </a>
+                  Shipping Policy
+                </Link>
+              </p>
+              <p>
+                <Link
+                  className="inline-flex gap-x-2 text-gray-400 hover:text-yellow"
+                  to="/terms-of-services"
+                >
+                  Terms Of Service
+                </Link>
               </p>
             </div>
           </div>

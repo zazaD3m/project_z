@@ -5,7 +5,7 @@ import { Button } from "../../components/ui/button";
 
 const ContactPage = () => {
   return (
-    <section className="container  bg-bggray py-12 ">
+    <section className="container bg-bggray py-12">
       <div className="flex flex-col rounded-sm bg-primary-foreground p-12 px-10 shadow-sm md:flex-row">
         <section className="mb-8 w-full space-y-8 md:mb-0">
           <h2 className="text-4xl">Contact</h2>

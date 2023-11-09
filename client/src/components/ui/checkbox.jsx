@@ -5,7 +5,7 @@ import { Check } from "lucide-react";
 import { cn } from "../../lib/utils";
 
 const Checkbox = React.forwardRef(
-  ({ className, color = "", ...props }, ref) => {
+  ({ className, color = "", circle = false, ...props }, ref) => {
     const colorVariants = {
       red: "bg-[red] text-white",
       blue: "bg-[blue] text-white",
@@ -30,7 +30,7 @@ const Checkbox = React.forwardRef(
               `h-full w-full rounded-full outline outline-1 outline-offset-2 outline-[black]`,
           )}
         >
-          {color ? null : <Check className="h-4 w-4" />}
+          {color ? null : circle ? null : <Check className="h-4 w-4" />}
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
     );

@@ -1,20 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import AccountMain from "./container/AccountMain";
 import AccountSidebar from "./container/AccountSidebar";
 import { cn } from "../../lib/utils";
 import { useNavigate, useParams } from "react-router-dom";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const Account = () => {
   let { accountPage } = useParams();
   const navigate = useNavigate();
-  let { current: windowSize } = useRef(window.innerWidth);
+  const { width } = useWindowSize();
 
   useEffect(() => {
-    if (accountPage === undefined && windowSize > 1023) {
+    if (accountPage === undefined && width > 1023) {
       navigate("/account/profile");
     }
-  }, [accountPage]);
+  }, [accountPage, width]);
 
   return (
     <>
@@ -22,8 +23,8 @@ const Account = () => {
         <h2 className=" mb-4 text-4xl">Hello Zaza</h2>
         <div className="flex w-full gap-8">
           <AccountSidebar
-            windowSize={windowSize.current}
-            className="flex w-full flex-col items-center gap-8 rounded-md bg-white p-4 shadow-sm lg:basis-1/5"
+            windowSize={width}
+            className="flex h-min w-full flex-col items-center gap-8 rounded-md bg-white p-4 shadow-sm lg:basis-1/5"
           />
           <AccountMain
             accountPage={accountPage}

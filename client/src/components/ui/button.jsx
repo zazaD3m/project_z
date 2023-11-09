@@ -7,8 +7,8 @@ import { cn } from "../../lib/utils";
 
 /**
  * @type React.FC<ButtonPropTypes>
- * @param  variant "default" | "ghost"
- * @param  size "xs | sm | default | lg | xl"
+ * @param  variant "default" | "ghost" | "link" | "secondary"
+ * @param  size "xs" | "sm" | "default" | "lg" | "xl" | "link"
  * @param  asChild
  * @param  className "className"
  */
@@ -26,6 +26,9 @@ const Button = React.forwardRef(
                   default:
                     "bg-primary-light text-primary-foreground lg:hover:bg-yellow lg:hover:text-primary",
                   ghost: "rounded-none bg-transparent",
+                  link: "rounded-none bg-transparent underline-offset-4 lg:hover:underline",
+                  secondary:
+                    "bg-yellow text-black lg:hover:bg-primary-light lg:hover:text-primary-foreground",
                 },
                 size: {
                   default: "px-5 py-2.5",
@@ -34,6 +37,7 @@ const Button = React.forwardRef(
                   lg: "px-5 py-3 text-base",
                   xl: "px-6 py-3.5 text-base",
                   icon: "h-9 w-9",
+                  link: "w-min p-0",
                 },
               },
               defaultVariants: {

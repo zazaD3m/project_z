@@ -18,7 +18,7 @@ const HeaderBottomNavMenuItem = ({ dropDown, title, link }) => {
         />
       </NavigationMenuTrigger>
       <NavigationMenuContent className="absolute left-0 top-0 h-full w-full border-none bg-primary outline-none data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft">
-        <nav className="">
+        <nav>
           <ul className="grid grid-cols-3 grid-rows-1 gap-4 p-8">
             {dropDown.map((item, i) => (
               <ListItem key={i} title={item.title} listItems={item.content} />

@@ -6,7 +6,7 @@ import StoreTopNav from "../components/StoreTopNav";
 const StoreMainSection = ({ productListDetails, className }) => {
   return (
     <>
-      <div className="flex flex-col items-center  lg:px-2.5">
+      <div className="flex flex-col items-center lg:px-2.5">
         <StoreTopNav productListDetails={productListDetails} />
         <section className="w-full">
           <div

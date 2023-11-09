@@ -4,9 +4,12 @@ import { Autoplay } from "swiper/modules";
 import brandsData from "../assets/brandsData";
 import Brand from "../components/Brand";
 
+import "swiper/css";
+import "swiper/css/autoplay";
+
 const Brands = () => {
   return (
-    <section className="bg-bggray container pt-8 sm:pb-8">
+    <section className="container bg-bggray pt-8 sm:pb-8">
       <div className="rounded-xl bg-white  shadow-sm">
         <Swiper
           slidesPerView={2}
