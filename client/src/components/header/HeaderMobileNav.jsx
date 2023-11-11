@@ -86,7 +86,7 @@ function postNavContent(navContent) {
       <li key={i}>
         <SheetClose asChild>
           <Button
-            className="my-1 justify-start pl-4 text-sm shadow-none active:text-yellow"
+            className="my-1 justify-start pl-4 text-sm shadow-none active:text-yellow aria-[current=page]:text-yellow"
             variant="ghost"
             asChild
             key={i}
