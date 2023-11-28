@@ -20,13 +20,13 @@ const Dashboard = () => {
       <section className="grid grid-cols-6 gap-x-6">
         <DashboardFirstSection />
       </section>
-      <section className="grid grid-cols-8 gap-x-6">
+      <section className="">
         <DashboardSecondSection />
       </section>
-      <section className="grid grid-cols-8 gap-x-6">
+      <section className="">
         <DashboardThirdSection />
       </section>
-      <section className="grid grid-cols-2 gap-x-6">
+      <section className="">
         <DashboardForthSection />
       </section>
     </div>

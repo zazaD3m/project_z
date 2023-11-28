@@ -1,8 +1,18 @@
+import {
+  DashboardCard,
+  DashboardCardHeader,
+} from "../../../components/ui/Card";
+import RecentOrders from "../components/RecentOrders";
+
 const DashboardThirdSection = () => {
   return (
     <>
-      <div className="col-span-6 h-[500px] bg-yellow-200"></div>
-      <div className="col-span-2 h-[500px] bg-yellow-200"></div>
+      <DashboardCard>
+        <DashboardCardHeader className="text-lg font-semibold">
+          Recent orders
+        </DashboardCardHeader>
+        <RecentOrders />
+      </DashboardCard>
     </>
   );
 };

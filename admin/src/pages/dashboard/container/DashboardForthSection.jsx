@@ -1,8 +1,18 @@
+import {
+  DashboardCard,
+  DashboardCardHeader,
+} from "../../../components/ui/Card";
+import RecentOrders from "./RecentOrders";
+
 const DashboardForthSection = () => {
   return (
     <>
-      <div className="col-span-1 h-[460px] bg-purple-200"></div>
-      <div className="col-span-1 h-[460px] bg-purple-200"></div>
+      <DashboardCard>
+        <DashboardCardHeader className="text-lg font-semibold">
+          Recent orders
+        </DashboardCardHeader>
+        <RecentOrders />
+      </DashboardCard>
     </>
   );
 };

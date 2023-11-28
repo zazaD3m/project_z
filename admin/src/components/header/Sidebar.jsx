@@ -38,7 +38,7 @@ const navbarContent = [
     items: [
       {
         title: "Add Product",
-        link: "/catalog/addproduct",
+        link: "/catalog/products/addproduct",
         icon: <ShoppingCart size={24} />,
         id: 101,
       },
@@ -50,7 +50,7 @@ const navbarContent = [
       },
       {
         title: "Add Brand",
-        link: "/catalog/addbrand",
+        link: "/catalog/brands/addbrand",
         icon: <Pentagon size={24} />,
         id: 103,
       },
@@ -62,7 +62,7 @@ const navbarContent = [
       },
       {
         title: "Add Category",
-        link: "/catalog/addcategory",
+        link: "/catalog/categories/addcategory",
         icon: <LayoutGrid size={24} />,
         id: 105,
       },
@@ -74,7 +74,7 @@ const navbarContent = [
       },
       {
         title: "Add Color",
-        link: "/catalog/addcolor",
+        link: "/catalog/colors/addcolor",
         icon: <Palette size={24} />,
         id: 107,
       },
@@ -131,7 +131,7 @@ const Sidebar = () => {
                               variant="ghost"
                               className="w-full justify-start gap-x-2 hover:bg-background aria-[current=page]:bg-background"
                             >
-                              <NavLink to={el.link}>
+                              <NavLink end to={el.link}>
                                 {el.icon}
                                 {el.title}
                               </NavLink>

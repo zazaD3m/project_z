@@ -17,8 +17,6 @@ const UserAuthForm = () => {
 
     setTimeout(() => {
       setIsLoading(false);
-      console.log(event.target[0].value);
-      console.log(event.target[1].value);
       navigate("/");
     }, 1000);
   }

@@ -22,25 +22,37 @@ import {
 
 import "./App.css";
 import Customers from "./pages/customers/Customers";
+import EditColor from "./pages/colors/EditColor";
+import FormTest from "./pages/formtesting/FormTest";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route key={1} path="/">
       <Route path="login" element={<Login />} />
+      <Route path="formtest" element={<FormTest />} />
       <Route element={<Layout />}>
         <Route index element={<Dashboard />} />
         <Route path="customers" element={<Customers />} />
         <Route path="orders" element={<Orders />} />
         <Route path="enquiries" element={<Enquiries />} />
         <Route path="catalog">
-          <Route path="addproduct" element={<AddProduct />} />
-          <Route path="products" element={<Products />} />
-          <Route path="addbrand" element={<AddBrand />} />
-          <Route path="brands" element={<Brands />} />
-          <Route path="addcategory" element={<AddCategory />} />
-          <Route path="categories" element={<Categories />} />
-          <Route path="addcolor" element={<AddColor />} />
-          <Route path="colors" element={<Colors />} />
+          <Route path="products">
+            <Route index element={<Products />} />
+            <Route path="addproduct" element={<AddProduct />} />
+          </Route>
+          <Route path="brands">
+            <Route index element={<Brands />} />
+            <Route path="addbrand" element={<AddBrand />} />
+          </Route>
+          <Route path="categories">
+            <Route index element={<Categories />} />
+            <Route path="addcategory" element={<AddCategory />} />
+          </Route>
+          <Route path="colors">
+            <Route index element={<Colors />} />
+            <Route path="addcolor" element={<AddColor />} />
+            <Route path="editcolor/:id" element={<EditColor />} />
+          </Route>
         </Route>
       </Route>
     </Route>,
@@ -50,7 +62,7 @@ const router = createBrowserRouter(
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
