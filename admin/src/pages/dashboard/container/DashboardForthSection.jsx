@@ -2,7 +2,7 @@ import {
   DashboardCard,
   DashboardCardHeader,
 } from "../../../components/ui/Card";
-import RecentOrders from "./RecentOrders";
+import RecentOrders from "../../../components/table/example/RecentOrders";
 
 const DashboardForthSection = () => {
   return (

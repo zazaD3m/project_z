@@ -1,8 +1,8 @@
-import { Badge } from "../../../../components/ui/Badge";
-import { Checkbox } from "../../../../components/ui/Checkbox";
+import { Badge } from "../../ui/Badge";
+import { Checkbox } from "../../ui/Checkbox";
 
-import { ColumnHeader } from "./ColumnHeader";
-import { RowActions } from "./RowActions";
+import { ColumnHeader } from "../ColumnHeader";
+import { RowActions } from "../RowActions";
 
 import { labels, deliveries } from "./data/data";
 

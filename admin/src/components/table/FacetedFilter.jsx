@@ -1,8 +1,8 @@
 import { Check, PlusCircle } from "lucide-react";
 
-import { cn } from "../../../../lib/utils";
-import { Badge } from "../../../../components/ui/Badge";
-import { Button } from "../../../../components/ui/Button";
+import { cn } from "../../lib/utils";
+import { Badge } from "../ui/Badge";
+import { Button } from "../ui/Button";
 import {
   Command,
   CommandEmpty,
@@ -11,13 +11,9 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "../../../../components/ui/Command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../../../../components/ui/Popover";
-import { Separator } from "../../../../components/ui/Separator";
+} from "../ui/Command";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/Popover";
+import { Separator } from "../ui/Separator";
 
 export function FacetedFilter({ column, title, options }) {
   const facets = column?.getFacetedUniqueValues();

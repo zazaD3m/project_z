@@ -5,14 +5,14 @@ import {
   ChevronsRight,
 } from "lucide-react";
 
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "../ui/Button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../../../components/ui/Select";
+} from "../ui/Select";
 
 export function Pagination({ table }) {
   return (

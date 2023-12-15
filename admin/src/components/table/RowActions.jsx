@@ -1,6 +1,6 @@
 import { MoreHorizontal } from "lucide-react";
 
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "../ui/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,9 +13,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "../../../../components/ui/DropdownMenu";
+} from "../ui/DropdownMenu";
 
-import { labels } from "./data/data";
+import { labels } from "./example/data/data";
 
 export function RowActions({ row }) {
   const task = row.original;

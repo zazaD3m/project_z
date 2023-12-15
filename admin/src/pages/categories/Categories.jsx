@@ -1,5 +1,5 @@
 import { DashboardCard } from "../../components/ui/Card";
-import DynamicTable from "../../components/dynamic-table/Table";
+import DynamicTable from "../../components/dynamic-table/DynamicTable";
 import { ArrowUpDown, MoreHorizontal, User2 } from "lucide-react";
 import { Checkbox } from "../../components/ui/Checkbox";
 import { Button } from "../../components/ui/Button";

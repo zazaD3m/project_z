@@ -4,26 +4,15 @@ import ProductFormCategoryField from "./ProductFormCategoryField";
 import ProductFormBrandField from "./ProductFormBrandField";
 import ProductFormColorField from "./ProductFormColorField";
 
-import { Button } from "../../../components/ui/Button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  useFormField,
-} from "../../../components/ui/Form";
-import { Card, CardContent } from "../../../components/ui/Card";
+import { Button } from "../../../../components/ui/Button";
+import { Form } from "../../../../components/ui/Form";
+import { Card } from "../../../../components/ui/Card";
 
 import { DevTool } from "@hookform/devtools";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-import { Input } from "../../../components/ui/Input";
-import { Plus, X } from "lucide-react";
-import { Label } from "../../../components/ui/Label";
 import ProductFormImageField from "./ProductFormImageField";
 
 const productCategoriesArrayInitial = [
@@ -74,7 +63,7 @@ const schema = yup.object().shape({
   productSecondImage: yup.mixed().required("Add second picture"),
 });
 
-const ProductForm = () => {
+const ProductForm = ({ page }) => {
   renderCount++;
   const [productCategoriesArray, setProductCategoriesArray] = useState(
     productCategoriesArrayInitial,
@@ -82,13 +71,13 @@ const ProductForm = () => {
 
   const form = useForm({
     defaultValues: {
-      productTitle: "",
-      productDesc: "",
-      productPrice: "",
+      productTitle: page === "edit" ? "adidas" : "",
+      productDesc: page === "edit" ? "asdfhsaf" : "",
+      productPrice: page === "edit" ? 120 : "",
       productParentCategory: "women",
-      productCategory: "",
-      productBrand: "",
-      productColor: "",
+      productCategory: page === "edit" ? "jeans" : "",
+      productBrand: page === "edit" ? "adidas" : "",
+      productColor: page === "edit" ? "red" : "",
     },
     resolver: yupResolver(schema),
     mode: "onSubmit",
@@ -130,6 +119,8 @@ const ProductForm = () => {
   ];
 
   function onSubmit(data) {
+    console.log(URL.createObjectURL(data.productFirstImage));
+
     console.log(data);
   }
 

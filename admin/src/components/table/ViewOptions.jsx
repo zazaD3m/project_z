@@ -5,8 +5,8 @@ import {
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-} from "../../../../components/ui/DropdownMenu";
-import { Button } from "../../../../components/ui/Button";
+} from "../ui/DropdownMenu";
+import { Button } from "../ui/Button";
 
 import { Settings2 } from "lucide-react";
 

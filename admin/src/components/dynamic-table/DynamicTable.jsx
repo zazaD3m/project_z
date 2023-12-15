@@ -26,7 +26,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/Table";
-import { FacetedFilter } from "../../pages/dashboard/components/recentOrdersTable/FacetedFilter";
+import { FacetedFilter } from "../table/FacetedFilter";
 import { Link } from "react-router-dom";
 
 const DynamicTable = ({

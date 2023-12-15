@@ -5,8 +5,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../../components/ui/Form";
-import { RadioGroup, RadioGroupItem } from "../../../components/ui/RadioGroup";
+} from "../../../../components/ui/Form";
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "../../../../components/ui/RadioGroup";
 
 const ProductFormParentCategory = ({
   control,

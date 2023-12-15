@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import {
   flexRender,
   getCoreRowModel,
@@ -10,7 +9,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
+import { Toolbar } from "../../../components/table/Toolbar";
+import columns from "./CustomerTableColumns";
+import { customerList as data } from "../data/data";
 import {
   Table,
   TableBody,
@@ -18,16 +19,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../../../components/ui/Table.jsx";
+} from "../../../components/ui/Table";
+import { Pagination } from "../../../components/table/Pagination";
 
-import { Pagination } from "./Pagination.jsx";
-import { Toolbar } from "./Toolbar.jsx";
-
-const DataTable = ({ columns, data }) => {
+const CustomerTable = () => {
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState({});
   const [columnFilters, setColumnFilters] = useState([]);
-  const [sorting, setSorting] = useState([{ desc: true, id: "delivery" }]);
+  const [sorting, setSorting] = useState([]);
 
   const table = useReactTable({
     data,
@@ -53,7 +52,18 @@ const DataTable = ({ columns, data }) => {
 
   return (
     <div className="space-y-4">
-      <Toolbar table={table} />
+      <Toolbar
+        table={table}
+        filter={[
+          { placeHolder: "Filter SID", value: "sid" },
+          { placeHolder: "First name", value: "firstName" },
+          { placeHolder: "Last name", value: "lastName" },
+          { placeHolder: "E-Mail", value: "email" },
+          { placeHolder: "Phone number", value: "phone" },
+          { placeHolder: "Address", value: "address" },
+        ]}
+        facetedFilter={[]}
+      />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -108,4 +118,4 @@ const DataTable = ({ columns, data }) => {
     </div>
   );
 };
-export default DataTable;
+export default CustomerTable;

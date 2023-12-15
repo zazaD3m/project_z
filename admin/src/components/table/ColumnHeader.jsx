@@ -1,14 +1,14 @@
 import { ArrowDown, ArrowUp, ArrowUpDown, EyeOff } from "lucide-react";
 
-import { cn } from "../../../../lib/utils";
-import { Button } from "../../../../components/ui/Button";
+import { cn } from "../../lib/utils";
+import { Button } from "../ui/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../../../../components/ui/DropdownMenu";
+} from "../ui/DropdownMenu";
 
 export function ColumnHeader({ column, title, className }) {
   if (!column.getCanSort()) {

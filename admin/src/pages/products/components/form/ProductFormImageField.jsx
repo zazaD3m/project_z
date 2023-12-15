@@ -1,12 +1,12 @@
 import { Plus, X } from "lucide-react";
-import { Card } from "../../../components/ui/Card";
+import { Card } from "../../../../components/ui/Card";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../../components/ui/Form";
+} from "../../../../components/ui/Form";
 
 const ProductFormImageField = ({
   control,

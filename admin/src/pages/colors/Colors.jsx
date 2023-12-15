@@ -1,7 +1,7 @@
 import { ArrowUpDown, Circle } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import DynamicTable from "../../components/dynamic-table/Table";
+import DynamicTable from "../../components/dynamic-table/DynamicTable";
 import { Button } from "../../components/ui/Button";
 import { DashboardCard } from "../../components/ui/Card";
 import { Checkbox } from "../../components/ui/Checkbox";

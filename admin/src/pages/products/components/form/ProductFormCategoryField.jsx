@@ -4,7 +4,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../../components/ui/Form";
+} from "../../../../components/ui/Form";
 import {
   Command,
   CommandEmpty,
@@ -12,26 +12,30 @@ import {
   CommandInput,
   CommandItem,
   CommandSeparator,
-} from "../../../components/ui/Command";
-import { Button } from "../../../components/ui/Button";
+} from "../../../../components/ui/Command";
+import { Button } from "../../../../components/ui/Button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "../../../components/ui/Popover";
-import { cn } from "../../../lib/utils";
+} from "../../../../components/ui/Popover";
+import { cn } from "../../../../lib/utils";
 
 import { Link } from "react-router-dom";
 import { CheckIcon, ChevronsUpDown } from "lucide-react";
 
-const ProductFormColorField = ({ control, productColorsArray, form }) => {
+const ProductFormCategoryField = ({
+  control,
+  productCategoriesArray,
+  form,
+}) => {
   return (
     <FormField
       control={control}
-      name="productColor"
+      name="productCategory"
       render={({ field }) => (
         <FormItem className="flex flex-col">
-          <FormLabel className="text-lg font-semibold">Color</FormLabel>
+          <FormLabel className="text-lg font-semibold">Category</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
@@ -44,32 +48,35 @@ const ProductFormColorField = ({ control, productColorsArray, form }) => {
                   )}
                 >
                   {field.value
-                    ? productColorsArray.find(
-                        (productColor) => productColor.name === field.value,
+                    ? productCategoriesArray.find(
+                        (productCategory) =>
+                          productCategory.name === field.value,
                       )?.label
-                    : "Select color"}
+                    : "Select category"}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0">
               <Command>
-                <CommandInput placeholder="Search color..." />
+                <CommandInput placeholder="Search category..." />
                 <CommandEmpty className="px-8 py-4">
-                  <p className="mb-2 text-center text-sm">No colors found...</p>
+                  <p className="mb-2 text-center text-sm">
+                    No category found...
+                  </p>
                   <Button asChild className="w-full" variant="ghost">
-                    <Link to="/catalog/colors/addcolor" target="_blank">
-                      Add new color
+                    <Link to="/catalog/categories/addcategory" target="_blank">
+                      Add new category
                     </Link>
                   </Button>
                 </CommandEmpty>
                 <CommandGroup>
-                  {productColorsArray.map((color) => (
+                  {productCategoriesArray.map((category) => (
                     <CommandItem
-                      value={color.label}
-                      key={color.id}
+                      value={category.label}
+                      key={category.id}
                       onSelect={() => {
-                        form.setValue("productColor", color.name, {
+                        form.setValue("productCategory", category.name, {
                           shouldValidate: true,
                           shouldDirty: true,
                         });
@@ -78,18 +85,18 @@ const ProductFormColorField = ({ control, productColorsArray, form }) => {
                       <CheckIcon
                         className={cn(
                           "mr-2 h-4 w-4",
-                          color.name === field.value
+                          category.name === field.value
                             ? "opacity-100"
                             : "opacity-0",
                         )}
                       />
-                      {color.label}
+                      {category.label}
                     </CommandItem>
                   ))}
                   <CommandSeparator />
                   <CommandItem className="justify-center">
                     <Link
-                      to="/catalog/colors/addcolor"
+                      to="/catalog/categories/addcategory"
                       target="_blank"
                       className="w-full text-center"
                     >
@@ -106,4 +113,4 @@ const ProductFormColorField = ({ control, productColorsArray, form }) => {
     />
   );
 };
-export default ProductFormColorField;
+export default ProductFormCategoryField;

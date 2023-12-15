@@ -43,6 +43,12 @@ const navbarContent = [
         id: 101,
       },
       {
+        title: "Edit Product",
+        link: "/catalog/products/editproduct",
+        icon: <ShoppingCart size={24} />,
+        id: 901,
+      },
+      {
         title: "Product List",
         link: "/catalog/products",
         icon: <ShoppingCart size={24} />,
